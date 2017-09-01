@@ -57,7 +57,6 @@ module.exports = {
     hints: false
   },
   plugins: [
-    new ExtractTextPlugin('css/[name].bundle.css?[hash:7]'),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
