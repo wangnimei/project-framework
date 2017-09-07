@@ -6,7 +6,7 @@
  * @return {Boolean}     判断结果
  */
 export function isObject(obj) {
-  return obj !== null && typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]';
+  return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
@@ -15,7 +15,7 @@ export function isObject(obj) {
  * @return {Boolean}       判断结果
  */
 export function isFunction(val) {
-  return obj !== null && typeof val === 'function' && Object.prototype.toString.call(obj) === '[object Function]';
+  return typeof val === 'function' && Object.prototype.toString.call(obj) === '[object Function]';
 }
 
 /**
@@ -24,7 +24,7 @@ export function isFunction(val) {
  * @return {Boolean}    判断结果
  */
 export function isArray(val) {
-  return val != null && Object.prototype.toString.call(obj) === '[object Array]';
+  return Array.isArray(val) || Object.prototype.toString.call(obj) === '[object Array]';
 }
 
 /**
@@ -37,13 +37,11 @@ export function each(obj, iterator) {
   if (isArray(obj)) {
     for (let i = 0; i < obj.length; i++) {
       iterator.call(obj[i], obj[i], i);
-      // iterator(obj[i], i);
     }
   } else if (isObject(obj)) {
     for (let key in obj) {
       if (hasOwnProperty.call(obj, key)) {
         iterator.call(obj[key], obj[key], key);
-        // iterator(obj[key], key);
       }
     }
   }
