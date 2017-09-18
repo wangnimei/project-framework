@@ -9,9 +9,6 @@
 <script>
 export default {
   name: 'Home',
-  my_method() {
-    console.log('hello')
-  },
   data() {
     return {
       msg: 'This is home page'
@@ -20,11 +17,11 @@ export default {
   methods: {
     change() {
       console.log('hello')
-      this.msg = 'change the message';
+      this.msg = 'change the message'
     }
   },
   mounted() {
-    console.log(this)
+    // console.log(this)
   }
 }
 </script>

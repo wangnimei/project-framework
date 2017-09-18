@@ -1,9 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var isProduction = process.env.NODE_ENV === 'production';
+var isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
   entry:  './src/app.js',

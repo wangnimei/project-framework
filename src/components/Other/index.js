@@ -1,3 +1,3 @@
-import App from './Other.vue';
+import App from './Other.vue'
 
-export default App;
+export default App

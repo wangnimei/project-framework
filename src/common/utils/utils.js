@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /**
  * 判断是否是对象
@@ -6,7 +6,7 @@
  * @return {Boolean}     判断结果
  */
 export function isObject(obj) {
-  return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]';
+  return typeof obj === 'object' && Object.prototype.toString.call(obj) === '[object Object]'
 }
 
 /**
@@ -15,7 +15,7 @@ export function isObject(obj) {
  * @return {Boolean}       判断结果
  */
 export function isFunction(val) {
-  return typeof val === 'function' && Object.prototype.toString.call(obj) === '[object Function]';
+  return typeof val === 'function' && Object.prototype.toString.call(obj) === '[object Function]'
 }
 
 /**
@@ -24,7 +24,7 @@ export function isFunction(val) {
  * @return {Boolean}    判断结果
  */
 export function isArray(val) {
-  return Array.isArray(val) || Object.prototype.toString.call(obj) === '[object Array]';
+  return Array.isArray(val) || Object.prototype.toString.call(obj) === '[object Array]'
 }
 
 /**
@@ -36,17 +36,17 @@ export function isArray(val) {
 export function each(obj, iterator) {
   if (isArray(obj)) {
     for (let i = 0; i < obj.length; i++) {
-      iterator.call(obj[i], obj[i], i);
+      iterator.call(obj[i], obj[i], i)
     }
   } else if (isObject(obj)) {
     for (let key in obj) {
       if (hasOwnProperty.call(obj, key)) {
-        iterator.call(obj[key], obj[key], key);
+        iterator.call(obj[key], obj[key], key)
       }
     }
   }
 
-  return obj;
+  return obj
 }
 
 /**
@@ -56,22 +56,22 @@ export function each(obj, iterator) {
  * @param  {String} scope   键值
  */
 export function serialize(params, obj, scope) {
-  const array = isArray(obj), plain = isObject(obj);
-  let hash;
+  const array = isArray(obj), plain = isObject(obj)
+  let hash
 
   each(obj, (value, key) => {
-    hash = isObject(value) || isArray(value);
+    hash = isObject(value) || isArray(value)
 
     if (scope) {
-      key = scope + '[' + (plain || hash ? key : '') + ']';
+      key = scope + '[' + (plain || hash ? key : '') + ']'
     }
 
     if (!scope && array) {
-      params.add(value.name, value.value);
+      params.add(value.name, value.value)
     } else if (hash) {
-      serialize(params, value, key);
+      serialize(params, value, key)
     } else {
-      params.add(key, value);
+      params.add(key, value)
     }
   });
 }
@@ -82,21 +82,21 @@ export function serialize(params, obj, scope) {
  * @return {String}     url参数字符串
  */
 export function params(obj) {
-  const params = [];
+  const params = []
 
   params.add = function(key, value) {
     if (isFunction(value)) {
-      value = value();
+      value = value()
     }
     if (value === null) {
-      value = '';
+      value = ''
     }
-    this.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+    this.push(encodeURIComponent(key) + '=' + encodeURIComponent(value))
   };
 
-  serialize(params, obj);
+  serialize(params, obj)
 
-  return params.join('&').replace(/%20/g, '+');
+  return params.join('&').replace(/%20/g, '+')
 }
 
 /**
@@ -114,32 +114,32 @@ export function http(settings, success, error) {
   };
 
   if (settings.method === 'GET') {
-    options.headers['Content-Type'] = 'application/json';
+    options.headers['Content-Type'] = 'application/json'
     if (settings.data) {
-      settings.url = settings.url + '?' + params(settings.data);
+      settings.url = settings.url + '?' + params(settings.data)
     }
   }
 
   if (settings.method === 'POST') {
-    options.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8'
     if (settings.data) {
-      options.body = params(settings.data);
+      options.body = params(settings.data)
     }
   }
 
-  options.method = settings.method;
+  options.method = settings.method
 
   if (settings.headers && settings.headers.length > 0) {
     each(settings.headers, (value, key) => {
-      options.headers[key] = value;
+      options.headers[key] = value
     });
   }
 
   fetch(settings.url, options).then(res => {
-    return res.json();
+    return res.json()
   }).then(json => {
-    if (success) success(json);
+    if (success) success(json)
   }).catch(err => {
-    if (error) error(err);
+    if (error) error(err)
   });
 }
