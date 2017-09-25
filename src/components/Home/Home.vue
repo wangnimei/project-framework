@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <h1>{{msg}}</h1>
-    <div class="image"></div>
-    <router-link :to="{ name: 'other', params: {} }">go other page</router-link>
+    <button @click="change">click</button>
+    <input type="text" name="user">
+    <router-link :to="{ name: 'other', params: {id: 2} }">go other page</router-link>
+    <router-link :to="{ name: 'home', params: {id: 3} }">go this component</router-link>
   </div>
 </template>
 
@@ -11,17 +13,18 @@ export default {
   name: 'Home',
   data() {
     return {
-      msg: 'This is home page'
+      
+    }
+  },
+  computed:{
+    msg() {
+      return this.$store.state.home.msg
     }
   },
   methods: {
     change() {
-      console.log('hello')
-      this.msg = 'change the message'
+      this.$store.commit('changeMsg')
     }
-  },
-  mounted() {
-    // console.log(this)
   }
 }
 </script>
