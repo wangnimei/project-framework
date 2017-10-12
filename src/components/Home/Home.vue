@@ -1,23 +1,23 @@
 <template>
   <div class="home">
-    <h1>{{msg}}</h1>
-    <button @click="change">click</button>
-    <input type="text" name="user">
+    <my-title/>
     <router-link :to="{ name: 'other', params: {id: 2} }">go other page</router-link>
-    <router-link :to="{ name: 'home', params: {id: 3} }">go this component</router-link>
   </div>
 </template>
 
 <script>
+import MyTitle from '../Title'
+
 export default {
   name: 'Home',
-  data() {
-    return {
-      
-    }
+  components: {
+    MyTitle
   },
-  computed:{
-    msg() {
+  data() {
+    return {}
+  },
+  computed: {
+    msg () {
       return this.$store.state.home.msg
     }
   },
@@ -25,6 +25,9 @@ export default {
     change() {
       this.$store.commit('changeMsg')
     }
+  },
+  mounted() {
+
   }
 }
 </script>

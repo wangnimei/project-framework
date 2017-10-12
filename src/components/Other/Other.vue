@@ -1,13 +1,18 @@
 <template>
   <div class="other">
-    <h1>{{msg}}</h1>
+    <my-title/>
     <router-link :to="{ name: 'home', params: {id: 4} }">go home page</router-link>
   </div>
 </template>
 
 <script>
+import MyTitle from '../Title'
+
 export default {
   name: 'other',
+  components: {
+    MyTitle
+  },
   computed: {
     msg() {
       return this.$store.state.other.msg
@@ -18,4 +23,3 @@ export default {
   }
 }
 </script>
-

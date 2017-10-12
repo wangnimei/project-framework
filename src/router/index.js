@@ -4,7 +4,8 @@ import NotFondPage from '../components/404'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
     name: 'index',
     path: '/',
     redirect: {
@@ -17,14 +18,12 @@ const routes = [{
   {
     name: 'home',
     path: '/home/:id',
-    component: () =>
-      import ( /* webpackChunkName: "home" */ '../components/Home')
+    component: () => import(/* webpackChunkName: "home" */ '../components/Home')
   },
   {
     name: 'other',
     path: '/other/:id',
-    component: () =>
-      import ( /* webpackChunkName: "other" */ '../components/Other')
+    component: () => import(/* webpackChunkName: "other" */ '../components/Other')
   },
   {
     path: '*',
